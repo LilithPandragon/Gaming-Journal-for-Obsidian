@@ -1,0 +1,330 @@
+/* =========================================================
+   GAME JOURNAL
+   Obsidian snippet: place in .obsidian/snippets/
+   Enable under: Settings > Appearance > CSS snippets
+   Only applies to notes with  cssclasses: gamejournal
+   ========================================================= */
+
+.gamejournal {
+  --sj-ink:        #241f2e;   /* dark plum-black, text            */
+  --sj-paper:      #fbf9f4;   /* paper white                       */
+  --sj-lavender:   #e9ddf2;   /* fill of the purple boxes          */
+  --sj-line:       #b4a6c4;   /* dotted writing lines              */
+  --sj-pink:       #f2c9de;   /* accent                            */
+  --sj-row:        27px;      /* line spacing = line height        */
+  --sj-font:       "Silkscreen", "Press Start 2P", "Chakra Petch",
+                   ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+/* =========================================================
+   READABILITY
+   Dark themes set light text by default. That's unreadable
+   on a paper-white background, so switch to dark ink locally.
+   ========================================================= */
+
+.gamejournal.markdown-preview-view,
+.gamejournal .markdown-source-view.mod-cm6 .cm-content,
+.gamejournal .callout,
+.gamejournal .metadata-container {
+  --text-normal:     var(--sj-ink);
+  --text-muted:      #574c66;
+  --text-faint:      #7d7089;
+  --text-accent:     #5c2f9e;
+  --text-accent-hover: #7a45c7;
+  --text-selection:  rgba(180, 166, 196, 0.5);
+  --code-normal:     var(--sj-ink);
+  --code-background: rgba(180, 166, 196, 0.18);
+  --link-color:      #5c2f9e;
+  --checkbox-color:  var(--sj-ink);
+  --list-marker-color: #574c66;
+  --hr-color:        var(--sj-line);
+  color: var(--sj-ink);
+}
+
+/* Safety net: everything in the journal inherits dark ink */
+.gamejournal .callout-content,
+.gamejournal .callout-content p,
+.gamejournal .callout-content li,
+.gamejournal .callout-content td,
+.gamejournal .callout-content strong,
+.gamejournal .callout-content em,
+.gamejournal .cm-line,
+.gamejournal .cm-editor .cm-content {
+  color: var(--sj-ink);
+}
+
+/* ---------- Paper ---------- */
+
+.gamejournal.markdown-preview-view,
+.gamejournal .markdown-source-view.mod-cm6 .cm-content {
+  background: var(--sj-paper);
+}
+
+/* ---------- Note header = title bar ---------- */
+
+.gamejournal .inline-title,
+.gamejournal h1 {
+  font-family: var(--sj-font);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 1.35em;
+  color: var(--sj-ink);
+  background: var(--sj-paper);
+  border: 2px solid var(--sj-ink);
+  border-radius: 4px;
+  padding: 8px 14px;
+  box-shadow: 4px 4px 0 var(--sj-ink);
+  margin-bottom: 1.4em;
+}
+
+/* ---------- Boxes (callouts) ---------- */
+
+.gamejournal .callout {
+  --callout-padding: 0;
+  border: 2px solid var(--sj-ink);
+  border-radius: 4px;
+  background: var(--sj-paper);
+  box-shadow: 3px 3px 0 var(--sj-ink);
+  margin: 0 0 1.3em;
+  padding: 0;
+  mix-blend-mode: normal;
+  break-inside: avoid;
+}
+
+.gamejournal .callout-icon,
+.gamejournal .callout-fold { display: none; }
+
+/* Header bar: light text on dark, set explicitly */
+.gamejournal .callout-title,
+.gamejournal .callout-title-inner {
+  color: var(--sj-paper);
+}
+.gamejournal .callout-title {
+  background: var(--sj-ink);
+  font-family: var(--sj-font);
+  font-size: 0.8em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  padding: 7px 12px;
+  margin: 0;
+}
+
+.gamejournal .callout-content {
+  padding: 6px 14px 14px;
+  line-height: var(--sj-row);
+}
+
+/* Ruled writing area for the plain text boxes */
+.gamejournal .callout[data-callout="game"] .callout-content,
+.gamejournal .callout[data-callout="scene"] .callout-content,
+.gamejournal .callout[data-callout="liked"] .callout-content,
+.gamejournal .callout[data-callout="equipment"] .callout-content {
+  background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0 calc(var(--sj-row) - 1px),
+      var(--sj-line) calc(var(--sj-row) - 1px) var(--sj-row));
+  background-position: 0 6px;
+}
+
+/* Filled purple box, like the top-left one in the original */
+.gamejournal .callout[data-callout="game"] { background: var(--sj-lavender); }
+.gamejournal .callout[data-callout="game"] .callout-content { background-color: transparent; }
+
+/* Image boxes: dark background, text stays light here */
+.gamejournal .callout[data-callout="screenshot"] .callout-content,
+.gamejournal .callout[data-callout="firstgame"] .callout-content {
+  --text-normal: #d9d2e3;
+  --text-muted:  #a89cb8;
+  background: #14101a;
+  color: #d9d2e3;
+  text-align: center;
+  padding: 12px;
+}
+.gamejournal .callout[data-callout="screenshot"] .callout-content *,
+.gamejournal .callout[data-callout="firstgame"] .callout-content * {
+  color: #d9d2e3;
+}
+
+/* ---------- Rating: clickable checkboxes ---------- */
+
+.gamejournal .callout[data-callout="rating"] .callout-content {
+  padding: 12px 14px 14px;
+}
+
+/* List becomes a horizontal row */
+.gamejournal .callout[data-callout="rating"] ul {
+  columns: auto;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 0;
+  margin: 0;
+  counter-reset: points;
+}
+.gamejournal .callout[data-callout="rating"] li {
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  display: flex;
+}
+
+/* Each checked box increments the counter ... */
+.gamejournal .callout[data-callout="rating"] li.is-checked {
+  counter-increment: points;
+}
+/* ... and the running total is shown at the end of the row */
+.gamejournal .callout[data-callout="rating"] ul::after {
+  content: counter(points) " / 10";
+  font-family: var(--sj-font);
+  font-size: 1.05em;
+  margin-left: 14px;
+  white-space: nowrap;
+  color: var(--sj-ink);
+}
+
+/* Large, clickable boxes instead of tiny checkboxes */
+.gamejournal .callout[data-callout="rating"] input[type="checkbox"] {
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  top: 0;
+  border: 2px solid var(--sj-ink);
+  border-radius: 2px;
+  background: var(--sj-paper);
+  cursor: pointer;
+  transition: background 90ms ease;
+}
+.gamejournal .callout[data-callout="rating"] input[type="checkbox"]:hover {
+  background: var(--sj-lavender);
+}
+.gamejournal .callout[data-callout="rating"] input[type="checkbox"]:checked {
+  background: var(--sj-ink);
+}
+/* switch off the "x" from the other boxes here again */
+.gamejournal .callout[data-callout="rating"] input[type="checkbox"]:checked::after {
+  content: none;
+}
+
+/* If you use Meta Bind later: color the slider to match */
+.gamejournal .callout[data-callout="rating"] input[type="range"] {
+  accent-color: var(--sj-ink);
+}
+
+/* ---------- Tables inside the boxes ---------- */
+
+.gamejournal .callout table {
+  width: 100%;
+  border-collapse: collapse;
+  background: transparent;
+}
+.gamejournal .callout th { display: none; }
+.gamejournal .callout td {
+  border: none;
+  border-bottom: 1px dotted var(--sj-line);
+  padding: 5px 4px;
+  vertical-align: middle;
+  color: var(--sj-ink);
+}
+.gamejournal .callout td:last-child { width: 62%; }
+
+/* Monospace bars so they line up exactly */
+.gamejournal .callout code {
+  background: transparent;
+  color: var(--sj-ink);
+  font-size: 1.05em;
+  letter-spacing: 0.08em;
+  padding: 0;
+}
+
+/* ---------- Checkboxes as square boxes ---------- */
+
+.gamejournal .callout input[type="checkbox"] {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--sj-ink);
+  border-radius: 2px;
+  background: var(--sj-paper);
+  position: relative;
+  top: 2px;
+}
+.gamejournal .callout input[type="checkbox"]:checked::after {
+  content: "\00d7";
+  position: absolute;
+  inset: -7px 0 0 1px;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--sj-ink);
+}
+.gamejournal .callout .task-list-item.is-checked {
+  color: var(--sj-ink);
+  text-decoration: none;
+  opacity: 1;
+}
+.gamejournal .callout ul {
+  columns: 2;
+  padding-left: 1.1em;
+  margin: 4px 0;
+}
+
+/* ---------- Images: keep pixel art crisp ---------- */
+
+.gamejournal img {
+  image-rendering: pixelated;
+  max-width: 100%;
+  border-radius: 2px;
+}
+
+/* ---------- Properties ---------- */
+
+.gamejournal .metadata-container {
+  border: 2px solid var(--sj-ink);
+  border-radius: 4px;
+  background: var(--sj-paper);
+  padding: 8px 12px;
+  box-shadow: 3px 3px 0 var(--sj-ink);
+}
+.gamejournal .metadata-properties-heading,
+.gamejournal .metadata-property-icon {
+  color: #574c66;
+}
+.gamejournal .metadata-property-key-input {
+  font-family: var(--sj-font);
+  text-transform: uppercase;
+  font-size: 0.72em;
+  letter-spacing: 0.07em;
+  color: #574c66;
+}
+.gamejournal .metadata-property-value,
+.gamejournal .metadata-input-longtext,
+.gamejournal .metadata-input-text,
+.gamejournal .metadata-input-number,
+.gamejournal .multi-select-input {
+  color: var(--sj-ink);
+}
+.gamejournal .multi-select-pill {
+  background: var(--sj-lavender);
+  color: var(--sj-ink);
+}
+.gamejournal .metadata-add-button {
+  color: #574c66;
+}
+
+/* =========================================================
+   OPTIONAL: two-column layout like the physical notebook
+   Reading view only. Uncomment the block to try it.
+   ========================================================= */
+/*
+.gamejournal.markdown-preview-view .markdown-preview-section {
+  column-count: 2;
+  column-gap: 1.4em;
+}
+.gamejournal.markdown-preview-view .markdown-preview-section > div:has(.inline-title),
+.gamejournal.markdown-preview-view .markdown-preview-section > div:has(.metadata-container) {
+  column-span: all;
+}
+*/
