@@ -51,12 +51,3 @@ tags:
 > 
 > *The first video game I ever played*
 
----
-
-## My Games
-
-```dataview
-TABLE release_year AS "Year", played_on AS "Platform", rating AS "Rating"
-FROM #game
-SORT rating DESC
-```
