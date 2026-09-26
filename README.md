@@ -2,8 +2,6 @@
 
 A retro, notebook-style template for logging games you play, built for [Obsidian](https://obsidian.md/) with the [Templater](https://github.com/SilentVoid13/Templater) plugin and a matching CSS snippet.
 
-![style](https://img.shields.io/badge/style-handwritten%20notebook-lavender)
-
 ## What's included
 
 - **`Game Template.md`** - a Templater template. On creation it asks for the game's title, platform, and release year, then generates a note with:
