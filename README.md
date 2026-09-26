@@ -1,5 +1,6 @@
 # Game Journal (Obsidian)
 
+I saw something similar as a print and thought, “Cool, I want that, too.” 
 A retro, notebook-style template for logging games you play, built for [Obsidian](https://obsidian.md/) with the [Templater](https://github.com/SilentVoid13/Templater) plugin and a matching CSS snippet.
 
 ## What's included
